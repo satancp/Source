@@ -111,15 +111,19 @@ void UYichangshijian::getYichangliebiaoResponse(FHttpRequestPtr HttpRequest, FHt
 					FString eventCode = single2->GetStringField("eventCode");
 					FString eventName = single2->GetStringField("eventName");
 					FString eventType = single2->GetStringField("eventType");
+					FString eventImageNet = single2->GetStringField("eventImageNet");
 					FString eventStatus = single2->GetStringField("eventStatus");
                     FString happenTime = single2->GetStringField("happenTime");
                     FString crtAddr = single2->GetStringField("crtAddr");
                     FString eventImage = single2->GetStringField("eventImage");
                     FString reason = single2->GetStringField("reason");
                     FString zoneName = single2->GetStringField("zoneName");
-                    FString persionId = single2->GetStringField("persionId");
-                    FString persionName = single2->GetStringField("persionName");
-					messageList.Add(FUYichangEvent(eventCode, eventName, eventType, eventStatus, happenTime, crtAddr, eventImage, reason, zoneName, persionId, persionName));
+                    FString personId = single2->GetStringField("personId");
+                    FString personName = single2->GetStringField("personName");
+					FString personFaceImage = single2->GetStringField("personFaceImage");
+					FString deviceId = single2->GetStringField("deviceId");
+					FString updTime = single2->GetStringField("updTime");
+					eventList.Add(FUYichangEvent(eventCode, eventName, eventType, eventImageNet, eventStatus, happenTime, crtAddr, eventImage, reason, zoneName, personId, personName, personFaceImage, deviceId, updTime));
 				}
 				data.Add(FUYichangliebiao(currPage, pageSize, rowCount, pageCount, eventList));
 			}
@@ -184,16 +188,19 @@ void UYichangshijian::getYichangliebiaoPCResponse(FHttpRequestPtr HttpRequest, F
 					FString eventCode = single2->GetStringField("eventCode");
 					FString eventName = single2->GetStringField("eventName");
 					FString eventType = single2->GetStringField("eventType");
+					FString eventImageNet = single2->GetStringField("eventImageNet");
 					FString eventStatus = single2->GetStringField("eventStatus");
-                    FString happenTime = single2->GetStringField("happenTime");
-                    FString crtAddr = single2->GetStringField("crtAddr");
-                    FString eventImage = single2->GetStringField("eventImage");
-                    FString reason = single2->GetStringField("reason");
-                    FString zoneName = single2->GetStringField("zoneName");
-                    FString persionId = single2->GetStringField("persionId");
-                    FString persionName = single2->GetStringField("persionName");
-                    FString persionFaceImage = single2->GetStringField("persionFaceImage");
-					messageList.Add(FUYichangEventPC(eventCode, eventName, eventType, eventStatus, happenTime, crtAddr, eventImage, reason, zoneName, persionId, persionName, persionFaceImage));
+					FString happenTime = single2->GetStringField("happenTime");
+					FString crtAddr = single2->GetStringField("crtAddr");
+					FString eventImage = single2->GetStringField("eventImage");
+					FString reason = single2->GetStringField("reason");
+					FString zoneName = single2->GetStringField("zoneName");
+					FString personId = single2->GetStringField("personId");
+					FString personName = single2->GetStringField("personName");
+					FString personFaceImage = single2->GetStringField("personFaceImage");
+					FString deviceId = single2->GetStringField("deviceId");
+					FString updTime = single2->GetStringField("updTime");
+					eventList.Add(FUYichangEventPC(eventCode, eventName, eventType, eventImageNet, eventStatus, happenTime, crtAddr, eventImage, reason, zoneName, personId, personName, personFaceImage, deviceId, updTime));
 				}
 				data.Add(FUYichangliebiaoPC(currPage, pageSize, rowCount, pageCount, eventList));
 			}
@@ -226,7 +233,7 @@ void UYichangshijian::getYichangbaojingResponse(FHttpRequestPtr HttpRequest, FHt
 		{
 			FString code = JsonObject->GetStringField("code");
 			FString msg = JsonObject->GetStringField("msg");
-			FUYichangbaojing data;
+			TArray<FUYichangbaojing> data;
 			TArray<TSharedPtr<FJsonValue>> rawData = JsonObject->GetArrayField("data");
 			for (int32 index = 0; index < rawData.Num(); index++)
 			{
@@ -241,7 +248,10 @@ void UYichangshijian::getYichangbaojingResponse(FHttpRequestPtr HttpRequest, FHt
                 FString deviceY = single->GetStringField("deviceY");
                 FString deviceId = single->GetStringField("deviceId");
                 FString deviceName = single->GetStringField("deviceName");
-				data = FUYichangbaojing(zoneName, flowNum, density, eventCount, longitude, latitude, deviceX, deviceY, deviceId, deviceName);
+				FString happenTime = single->GetStringField("happenTime");
+				FString crtAddr = single->GetStringField("crtAddr");
+				FString eventImage = single->GetStringField("eventImage");
+				data.Add(FUYichangbaojing(eventCode, eventName, eventType, eventStatus, longitude, latitude, deviceX, deviceY, deviceId, deviceName, happenTime, crtAddr, eventImage));
 			}
 			UE_LOG(LogTemp, Warning, TEXT("%s"), *(code));
 		}
@@ -272,7 +282,7 @@ void UYichangshijian::getYichangDetailResponse(FHttpRequestPtr HttpRequest, FHtt
 		{
 			FString code = JsonObject->GetStringField("code");
 			FString msg = JsonObject->GetStringField("msg");
-			FUYichangEvent data;
+			FUYichangDetail data;
 			TArray<TSharedPtr<FJsonValue>> rawData = JsonObject->GetArrayField("data");
 			for (int32 index = 0; index < rawData.Num(); index++)
 			{
@@ -289,12 +299,14 @@ void UYichangshijian::getYichangDetailResponse(FHttpRequestPtr HttpRequest, FHtt
                 FString personId = single->GetStringField("personId");
                 FString personName = single->GetStringField("personName");
                 FString personFaceImage = single->GetStringField("personFaceImage");
-                int32 IsNeedSuppor = single->GetIntegerField("IsNeedSuppor");
+                int32 isNeedSuppor = single->GetIntegerField("isNeedSuppor");
                 FString deviceId = single->GetStringField("deviceId");
                 FString deviceName = single->GetStringField("deviceName");
                 FString handle_unit = single->GetStringField("handle_unit");
                 FString finish_date = single->GetStringField("finish_date");
-				data = FUYichangEvent(eventCode, eventName, eventType, eventStatus, happenTime, crtAddr, eventImage, reason, zoneName, persionId, persionName, personFaceImage, IsNeedSuppor, deviceId, deviceName, handle_unit, finish_date);
+				FString deviceX = single->GetStringField("deviceX");
+				FString deviceY = single->GetStringField("deviceY");
+				data = FUYichangDetail(eventCode, eventName, eventType, eventStatus, happenTime, crtAddr, eventImage, reason, zoneName, personId, personName, personFaceImage, isNeedSuppor, deviceId, deviceName, handle_unit, finish_date, deviceX, deviceY);
 			}
 			UE_LOG(LogTemp, Warning, TEXT("%s"), *(code));
 		}
@@ -333,13 +345,18 @@ void UYichangshijian::getYichangResultDetailResponse(FHttpRequestPtr HttpRequest
 				FString eventCode = single->GetStringField("eventCode");
 				FString eventName = single->GetStringField("eventName");
 				FString eventStatus = single->GetStringField("eventStatus");
-                FString persionId = single->GetStringField("persionId");
-                FString persionName = single->GetStringField("persionName");
-                FString persionFaceImage = single->GetStringField("persionFaceImage");
+                FString personId = single->GetStringField("personId");
+                FString personName = single->GetStringField("personName");
+                FString personFaceImage = single->GetStringField("personFaceImage");
                 FString successTime = single->GetStringField("successTime");
                 FString successDesc = single->GetStringField("successDesc");
-                FString successImage = single->GetStringField("successImage");
-				data = FUYichangResultDetail(eventCode, eventName, eventStatus, persionId, persionName, persionFaceImage, successTime, successDesc, successImage);
+				TArray<TSharedPtr<FJsonValue>> rawSuccessImage = single->GetArrayField("successImage");
+				TArray<FString> successImage;
+				for (int32 index2 = 0; index2 < rawSuccessImage.Num(); index2++)
+				{
+					successImage.Add(rawSuccessImage[index2]->AsString());
+				}
+				data = FUYichangResultDetail(eventCode, eventName, eventStatus, personId, personName, personFaceImage, successTime, successDesc, successImage);
 			}
 			UE_LOG(LogTemp, Warning, TEXT("%s"), *(code));
 		}
@@ -353,9 +370,9 @@ void UYichangshijian::resolveYichang(FString eventCode, FString type, TArray<FSt
     for (int32 index = 0; index < personIds.Num(); index++)
     {
         if(index != (personIds.Num() - 1)) {
-            ids = ids + personIds[index]->AsString() + ",";
+            ids = ids + personIds[index] + ",";
         } else {
-            ids = ids + personIds[index]->AsString();
+            ids = ids + personIds[index];
         }
     }
 	HttpReuest->SetURL("http://localhost:31111/event/send?eventCode=" + eventCode + "&type=" + type + "&personIds=" + ids);
@@ -402,6 +419,8 @@ void UYichangshijian::getYichanggaofadiResponse(FHttpRequestPtr HttpRequest, FHt
 	}
 	else if (bSucceeded && EHttpResponseCodes::IsOk(HttpResponse->GetResponseCode()))
 	{
+		TSharedPtr<FJsonObject> JsonObject;
+		TSharedRef<TJsonReader<>> Reader = TJsonReaderFactory<>::Create(HttpResponse->GetContentAsString());
 		if (FJsonSerializer::Deserialize(Reader, JsonObject))
 		{
 			FString code = JsonObject->GetStringField("code"); 
@@ -417,7 +436,7 @@ void UYichangshijian::getYichanggaofadiResponse(FHttpRequestPtr HttpRequest, FHt
 				TArray<FUYichanggaofadiDevice> devices; 
 				for (int32 index2 = 0; index2 < rawDevices.Num(); index2++)
 				{
-					TSharedPtr<FJsonObject> single2 = rawEmotionZoneList[index2]->AsObject();
+					TSharedPtr<FJsonObject> single2 = rawDevices[index2]->AsObject();
 					FString deviceId = single2->GetStringField("deviceId"); 
 					FString deviceName = single2->GetStringField("deviceName"); 
 					FString deviceX = single2->GetStringField("deviceX"); 
@@ -426,8 +445,9 @@ void UYichangshijian::getYichanggaofadiResponse(FHttpRequestPtr HttpRequest, FHt
 					FString rtspUrl = single2->GetStringField("rtspUrl"); 
 					FString longitude = single2->GetStringField("longitude"); 
 					FString latitude = single2->GetStringField("latitude"); 
+					devices.Add(FUYichanggaofadiDevice(deviceId, deviceName, deviceX, deviceY, zoneName, rtspUrl, longitude, latitude));
 				}
-				data.Add(FUYichanggaofadiDevice(deviceId, deviceName, deviceX, deviceY, zoneName, rtspUrl, longitude, latitude));
+				data.Add(FUYichanggaofadi(policeName, policeNum, devices));
 			}
 			UE_LOG(LogTemp, Warning, TEXT("%s"), *(code));
 		}

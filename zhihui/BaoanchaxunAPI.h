@@ -20,18 +20,18 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void getDanrenxinxi(FString pid);
 	void getDanrenxinxiResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
-	UFUNCTION(BlueprintCallable)
-		void getQuanbuxinxi();
-	void getQuanbuxinxiResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
-	UFUNCTION(BlueprintCallable)
-		void getXingdongguiji(FString pid);
-	void getXingdongguijiResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
-	UFUNCTION(BlueprintCallable)
-		void getFujinbaoan(FString ecode);
-	void getFujinbaoanResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
-	UFUNCTION(BlueprintCallable)
-		void getPaifabaoan(FString ecode);
-	void getPaifabaoanResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
+	// UFUNCTION(BlueprintCallable)
+	//	void getQuanbuxinxi();
+	// void getQuanbuxinxiResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
+	// UFUNCTION(BlueprintCallable)
+	//	void getXingdongguiji(FString pid);
+	// void getXingdongguijiResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
+	// UFUNCTION(BlueprintCallable)
+	//	void getFujinbaoan(FString ecode);
+	 //void getFujinbaoanResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
+	// UFUNCTION(BlueprintCallable)
+	//	void getPaifabaoan(FString ecode);
+		//void getPaifabaoanResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
 };
 
 USTRUCT()

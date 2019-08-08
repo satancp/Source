@@ -122,7 +122,7 @@ void UQitaAPI::getTianqiResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr H
 			FString exercise_index = single->GetStringField("exercise_index");
 			FString aqi = single->GetStringField("aqi");
 			FString quality = single->GetStringField("quality");
-			FUTianqi data = FUTianqi(temperature, weather, weather_id_fa, weather_id_fb, wind, week, city, date_y, dressing_index, dressing_advice, uv_index, comfort_index, wash_index, travel_index, exercise_index, aqi, quality));
+			FUTianqi data = FUTianqi(temperature, weather, weather_id_fa, weather_id_fb, wind, week, city, date_y, dressing_index, dressing_advice, uv_index, comfort_index, wash_index, travel_index, exercise_index, aqi, quality);
 			UE_LOG(LogTemp, Warning, TEXT("%s"), *(code));
 		}
 	}

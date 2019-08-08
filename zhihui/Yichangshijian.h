@@ -16,7 +16,7 @@ class ZHIHUI_API UYichangshijian : public UObject
 {
 	GENERATED_BODY()
 public:
-	UQitaAPI();
+	UYichangshijian();
 	UFUNCTION(BlueprintCallable)
 		void getRenliumijiAlert(FString num);
 	void getRenliumijiAlertResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
@@ -85,7 +85,7 @@ struct FUYichangliebiao {
 		pageSize = ps;
 		rowCount = rc;
 		pageCount = pc;
-		eventList = ml;
+		eventList = el;
 	};
 };
 
@@ -95,28 +95,36 @@ struct FUYichangEvent {
 		UPROPERTY() FString eventCode;
 	UPROPERTY() FString eventName;
 	UPROPERTY() FString eventType;
+	UPROPERTY() FString eventImageNet;
 	UPROPERTY() FString eventStatus;
 	UPROPERTY() FString happenTime;
 	UPROPERTY() FString crtAddr;
 	UPROPERTY() FString eventImage;
 	UPROPERTY() FString reason;
 	UPROPERTY() FString zoneName;
-	UPROPERTY() FString persionId;
-	UPROPERTY() FString persionName;
+	UPROPERTY() FString personId;
+	UPROPERTY() FString personName;
+	UPROPERTY() FString personFaceImage;
+	UPROPERTY() FString deviceId;
+	UPROPERTY() FString updTime;
 
 	FUYichangEvent() {};
-	FUYichangEvent(FString ec, FString en, FString et, FString es, FString ht, FString ca, FString ei, FString rea, FString zn, FString pi, FString pn) {
+	FUYichangEvent(FString ec, FString en, FString et, FString ein, FString es, FString ht, FString ca, FString ei, FString rea, FString zn, FString pi, FString pn, FString pfi, FString di, FString ut) {
 		eventCode = ec;
 		eventName = en;
 		eventType = et;
+		eventImageNet = ein;
 		eventStatus = es;
 		happenTime = ht;
 		crtAddr = ca;
 		eventImage = ei;
 		reason = rea;
 		zoneName = zn;
-		persionId = pi;
-		persionName = pn;
+		personId = pi;
+		personName = pn;
+		personFaceImage = pfi;
+		deviceId = di;
+		updTime = ut;
 	};
 };
 
@@ -145,30 +153,36 @@ struct FUYichangEventPC {
 		UPROPERTY() FString eventCode;
 	UPROPERTY() FString eventName;
 	UPROPERTY() FString eventType;
+	UPROPERTY() FString eventImageNet;
 	UPROPERTY() FString eventStatus;
 	UPROPERTY() FString happenTime;
 	UPROPERTY() FString crtAddr;
 	UPROPERTY() FString eventImage;
 	UPROPERTY() FString reason;
 	UPROPERTY() FString zoneName;
-	UPROPERTY() FString persionId;
-	UPROPERTY() FString persionName;
-	UPROPERTY() FString persionFaceImage;
+	UPROPERTY() FString personId;
+	UPROPERTY() FString personName;
+	UPROPERTY() FString personFaceImage;
+	UPROPERTY() FString deviceId;
+	UPROPERTY() FString updTime;
 
-	FUYichangEvent() {};
-	FUYichangEvent(FString ec, FString en, FString et, FString es, FString ht, FString ca, FString ei, FString rea, FString zn, FString pi, FString pn, FString pfi) {
+	FUYichangEventPC() {};
+	FUYichangEventPC(FString ec, FString en, FString et, FString ein, FString es, FString ht, FString ca, FString ei, FString rea, FString zn, FString pi, FString pn, FString pfi, FString di, FString ut) {
 		eventCode = ec;
 		eventName = en;
 		eventType = et;
+		eventImageNet = ein;
 		eventStatus = es;
 		happenTime = ht;
 		crtAddr = ca;
 		eventImage = ei;
 		reason = rea;
 		zoneName = zn;
-		persionId = pi;
-		persionName = pn;
-		persionFaceImage = pfi;
+		personId = pi;
+		personName = pn;
+		personFaceImage = pfi;
+		deviceId = di;
+		updTime = ut;
 	};
 };
 
@@ -185,9 +199,12 @@ struct FUYichangbaojing {
 	UPROPERTY() FString deviceY;
 	UPROPERTY() FString deviceId;
 	UPROPERTY() FString deviceName;
+	UPROPERTY() FString happenTime;
+	UPROPERTY() FString crtAddr;
+	UPROPERTY() FString eventImage;
 
 	FUYichangbaojing() {};
-	FUYichangbaojing(FString ec, FString en, FString et, FString es, FString lon, FString lat, FString dx, FString dy, FString di, FString dn) {
+	FUYichangbaojing(FString ec, FString en, FString et, FString es, FString lon, FString lat, FString dx, FString dy, FString di, FString dn, FString ht, FString ca, FString ei) {
 		eventCode = ec;
 		eventName = en;
 		eventType = et;
@@ -198,6 +215,9 @@ struct FUYichangbaojing {
 		deviceY = dy;
 		deviceId = di;
 		deviceName = dn;
+		happenTime = ht;
+		crtAddr = ca;
+		eventImage = ei;
 	};
 };
 
@@ -216,14 +236,16 @@ struct FUYichangDetail {
 	UPROPERTY() FString personId;
 	UPROPERTY() FString personName;
 	UPROPERTY() FString personFaceImage;
-	UPROPERTY() int32 IsNeedSuppor;
+	UPROPERTY() int32 isNeedSuppor;
 	UPROPERTY() FString deviceId;
 	UPROPERTY() FString deviceName;
 	UPROPERTY() FString handle_unit;
 	UPROPERTY() FString finish_date;
+	UPROPERTY() FString deviceX;
+	UPROPERTY() FString deviceY;
 
 	FUYichangDetail() {};
-	FUYichangDetail(FString ec, FString en, FString et, FString es, FString ht, FString ca, FString ei, FString rea, FString zn, FString pi, FString pn, FString pfi, int32 ins, FString di, FString dn, FString hu, FString fd) {
+	FUYichangDetail(FString ec, FString en, FString et, FString es, FString ht, FString ca, FString ei, FString rea, FString zn, FString pi, FString pn, FString pfi, int32 ins, FString di, FString dn, FString hu, FString fd, FString dx, FString dy) {
 		eventCode = ec;
 		eventName = en;
 		eventType = et;
@@ -236,11 +258,40 @@ struct FUYichangDetail {
 		personId = pi;
 		personName = pn;
 		personFaceImage = pfi;
-		IsNeedSuppor = ins;
+		isNeedSuppor = ins;
 		deviceId = di;
 		deviceName = dn;
 		handle_unit = hu;
 		finish_date = fd;
+		deviceX = dx;
+		deviceY = dy;
+	};
+};
+
+USTRUCT()
+struct FUYichangResultDetail {
+	GENERATED_BODY()
+		UPROPERTY() FString eventCode;
+	UPROPERTY() FString eventName;
+	UPROPERTY() FString eventStatus;
+	UPROPERTY() FString personId;
+	UPROPERTY() FString personName;
+	UPROPERTY() FString personFaceImage;
+	UPROPERTY() FString successDesc;
+	UPROPERTY() FString successTime;
+	UPROPERTY() TArray<FString> successImage;
+
+	FUYichangResultDetail() {};
+	FUYichangResultDetail(FString ec, FString en, FString es, FString pi, FString pn, FString pfi, FString sd, FString st, TArray<FString> si) {
+		eventCode = ec;
+		eventName = en;
+		eventStatus = es;
+		personId = pi;
+		personName = pn;
+		personFaceImage = pfi;
+		successDesc = sd;
+		successTime = st;
+		successImage = si;
 	};
 };
 

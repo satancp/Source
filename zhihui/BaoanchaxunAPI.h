@@ -20,18 +20,18 @@ public:
 	UFUNCTION(BlueprintCallable)
 		void getDanrenxinxi(FString pid);
 	void getDanrenxinxiResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
-	// UFUNCTION(BlueprintCallable)
-	//	void getQuanbuxinxi();
-	// void getQuanbuxinxiResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
-	// UFUNCTION(BlueprintCallable)
-	//	void getXingdongguiji(FString pid);
-	// void getXingdongguijiResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
-	// UFUNCTION(BlueprintCallable)
-	//	void getFujinbaoan(FString ecode);
-	 //void getFujinbaoanResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
-	// UFUNCTION(BlueprintCallable)
-	//	void getPaifabaoan(FString ecode);
-		//void getPaifabaoanResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
+	UFUNCTION(BlueprintCallable)
+		void getQuanbuxinxi();
+	void getQuanbuxinxiResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
+	UFUNCTION(BlueprintCallable)
+		void getXingdongguiji(FString pid);
+	void getXingdongguijiResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
+	UFUNCTION(BlueprintCallable)
+		void getFujinbaoan(FString ecode);
+	 void getFujinbaoanResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
+	UFUNCTION(BlueprintCallable)
+		void getPaifabaoan(FString ecode);
+		void getPaifabaoanResponse(FHttpRequestPtr HttpRequest, FHttpResponsePtr HttpResponse, bool bSucceeded);
 };
 
 USTRUCT()
@@ -52,5 +52,53 @@ struct FUDanrenxinxi {
 		zoneName = zn;
 		longitude = lon;
 		latitude = lat;
+	};
+};
+
+USTRUCT()
+struct FUXingdongguiji {
+	GENERATED_BODY()
+		UPROPERTY() FString personId;
+	UPROPERTY() FString deviceId;
+	UPROPERTY() FString deviceName;
+	UPROPERTY() FString deviceX;
+	UPROPERTY() FString deviceY;
+	UPROPERTY() FString longitude;
+	UPROPERTY() FString latitude;
+	UPROPERTY() int64 crtTime;
+
+	FUXingdongguiji() {};
+	FUXingdongguiji(FString pid, FString di, FString dn, FString dx, FString dy, FString lon, FString lat, int64 ct) {
+		personId = pid;
+		deviceId = di;
+		deviceName = dn;
+		deviceX = dx;
+		deviceY = dy;
+		longitude = lon;
+		latitude = lat;
+		crtTime = ct;
+	};
+};
+
+USTRUCT()
+struct FUFujinbaoan {
+	GENERATED_BODY()
+		UPROPERTY() FString personId;
+	UPROPERTY() FString personFaceImage;
+	UPROPERTY() FString personFaceImageNet;
+	UPROPERTY() FString personName;
+	UPROPERTY() FString zoneName;
+	UPROPERTY() int32 age;
+	UPROPERTY() FString distance;
+
+	FUFujinbaoan() {};
+	FUFujinbaoan(FString pid, FString pfi, FString pfin, FString pn, FString zn, int32 a, FString di) {
+		personId = pid;
+		personFaceImage = pfi;
+		personFaceImageNet = pfin;
+		personName = pn;
+		zoneName = zn;
+		age = a;
+		distance = di;
 	};
 };

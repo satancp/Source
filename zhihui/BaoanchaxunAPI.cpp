@@ -2,6 +2,9 @@
 
 
 #include "BaoanchaxunAPI.h"
+#include "Runtime/Online/HTTP/Public/Http.h"
+#include "Json.h"
+#include "JsonUtilities.h"
 
 UBaoanchaxunAPI::UBaoanchaxunAPI() {
 
@@ -79,7 +82,7 @@ void UBaoanchaxunAPI::getQuanbuxinxiResponse(FHttpRequestPtr HttpRequest, FHttpR
 				FString zoneName = rawSingle->GetStringField("zoneName");
 				FString longitude = rawSingle->GetStringField("longitude");
 				FString latitude = rawSingle->GetStringField("latitude");
-				FUDanrenxinxi singel = FUDanrenxinxi(personId, personFaceImage, personName, zoneName, longitude, latitude);
+				FUDanrenxinxi single = FUDanrenxinxi(personId, personFaceImage, personName, zoneName, longitude, latitude);
 				data.Add(single);
 			}
 			UE_LOG(LogTemp, Warning, TEXT("%s"), *(code));
@@ -124,7 +127,7 @@ void UBaoanchaxunAPI::getXingdongguijiResponse(FHttpRequestPtr HttpRequest, FHtt
 				FString longitude = rawSingle->GetStringField("longitude");
 				FString latitude = rawSingle->GetStringField("latitude");
 				int64 crtTime = rawSingle->GetIntegerField("crtTime");
-				FUXingdongguiji singel = FUXingdongguiji(personId, deviceId, deviceName, deviceX, deviceY, longitude, latitude, crtTime);
+				FUXingdongguiji single = FUXingdongguiji(personId, deviceId, deviceName, deviceX, deviceY, longitude, latitude, crtTime);
 				data.Add(single);
 			}
 			UE_LOG(LogTemp, Warning, TEXT("%s"), *(code));
@@ -168,7 +171,7 @@ void UBaoanchaxunAPI::getFujinbaoanResponse(FHttpRequestPtr HttpRequest, FHttpRe
 				FString zoneName = rawSingle->GetStringField("zoneName");
 				int32 age = rawSingle->GetIntegerField("age");
 				FString distance = rawSingle->GetStringField("distance");
-				FUFujinbaoan singel = FUFujinbaoan(personId, personFaceImage, personFaceImageNet, personName, zoneName, age, distance);
+				FUFujinbaoan single = FUFujinbaoan(personId, personFaceImage, personFaceImageNet, personName, zoneName, age, distance);
 				data.Add(single);
 			}
 			UE_LOG(LogTemp, Warning, TEXT("%s"), *(code));
@@ -212,7 +215,7 @@ void UBaoanchaxunAPI::getPaifabaoanResponse(FHttpRequestPtr HttpRequest, FHttpRe
 				FString zoneName = rawSingle->GetStringField("zoneName");
 				int32 age = rawSingle->GetIntegerField("age");
 				FString distance = rawSingle->GetStringField("distance");
-				FUFujinbaoan singel = FUFujinbaoan(personId, personFaceImage, personFaceImageNet, personName, zoneName, age, distance);
+				FUFujinbaoan single = FUFujinbaoan(personId, personFaceImage, personFaceImageNet, personName, zoneName, age, distance);
 				data.Add(single);
 			}
 			UE_LOG(LogTemp, Warning, TEXT("%s"), *(code));
